@@ -1,21 +1,13 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE HTML>
+<script type="text/JavaScript" src="cafeplaylist.js"></script>
 <html>
 <head>
-<meta charset="utf-8">
-<link rel="stylesheet" href="sp://import/css/adam.css">
-
-<!-- <link href="cafeplaylist.css" rel="stylesheet"> -->
-<title>Cafe Playlist</title>
+	<meta charset="utf-8">
+	<title>My First App</title>
+	<link rel="stylesheet" href="sp://import/css/adam.css">
+	<link rel="stylesheet" href="cafeplaylist.css">
 </head>
-
-<body id="view-start">
-<h1>Cafe Playlist</h1>
-
-<script src="jquery-1.7.min.js"></script>
-<script>
-	var sp = getSpotifyApi();
-	cafeplaylist = sp.require('cafeplaylist');
-	cafeplaylist.init();
-</script>
+<body onload="sp = getSpotifyApi(1); tutorial = sp.require('cafeplaylist'); cafeplaylist.init();">
+<h1 id="header">Hello, world!</h1>
 </body>
 </html>
