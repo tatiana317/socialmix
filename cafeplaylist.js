@@ -1,6 +1,11 @@
+"use strict";
+
 var sp = getSpotifyApi(1);
 var models = sp.require('sp://import/scripts/api/models');
 var player = models.player;
+var collaborativePlaylist = new models.Playlist("Collaborative Playlist");
+var playlist = models.Playlist.fromURI("spotify:user:1228060725:playlist:1UC58HGgNCri9RsKs8Jvh3");
+
 
 exports.init = init;
 
@@ -15,8 +20,15 @@ function init() {
 			updatePageWithTrackDetails();
 		}
 	});
+	
+	//$.each(playlist.data.all(),function(i,track){ collaborativePlaylist.add(track); });
+	var i, track;
+	for (i=0;i<playlist.length;i++)
+	{
+    	track = playlist.get(i);
+    	collaborativePlaylist.add(track.uri);
+	}
 
-	searchLastFMForEvents("stockholm");
 }
 
 function updatePageWithTrackDetails() {
@@ -34,37 +46,9 @@ function updatePageWithTrackDetails() {
 	}
 }
 
-function searchLastFMForEvents(city) {
+//add the tracks from the playlist into
+//$.each(pl.data.all(),function(i,track){ collaborativePlaylist.add(track); });
 
-	var req = new XMLHttpRequest();
-	req.open("GET", "http://ws.audioscrobbler.com/2.0/?method=geo.getevents&location=" + city + "&api_key=YOUR_KEY_HERE", true);
+//collaborativePlaylist.add(pl.tracks[0]);
+//playlist.add(m.Track.fromURI(results.tracks[j].uri));
 
-	req.onreadystatechange = function() {
-
-		console.log(req.status);
-
-   		if (req.readyState == 4) {
-    		if (req.status == 200) {
-       			console.log("Search complete!");
-       			console.log(req.responseText);
-     		}
-   		}
-  	};
-
-	req.send();
-}
-
-//var collaborativePlaylist = new models.Playlist("Collaborative Playlist");
-
-//have user enter spotify playlist url
-//var pl = Playlist.fromURI("spotify:user:spotify:playlist:3Yrvm5lBgnhzTYTXx2l55x", function(playlist) {
-//    console.log("Playlist loaded", playlist.name);
-//});
-
-//add the tracks from the playlist iinto
-//$.each(pl.data.all(),function(i,track){ myAwesomePlaylist.add(track); });
-
-//myAwesomePlaylist.add(pl.tracks[0]);
-//myAwesomePlaylist.add("spotify:track:6JEK0CvvjDjjMUBFoXShNZ");
-
-//var currentTrack, playlist, queue, queueVersion;
