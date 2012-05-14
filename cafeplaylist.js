@@ -4,14 +4,14 @@ var sp = getSpotifyApi(1);
 var models = sp.require('sp://import/scripts/api/models');
 var player = models.player;
 var collaborativePlaylist = new models.Playlist("Collaborative Playlist");
-var playlist = models.Playlist.fromURI("spotify:user:1228060725:playlist:1UC58HGgNCri9RsKs8Jvh3");
-
+//var playlist = models.Playlist.fromURI("spotify:user:1228060725:playlist:1UC58HGgNCri9RsKs8Jvh3");
+var playlist;
 
 exports.init = init;
 
-function init() {
+function init(myuri) {
 
-	updatePageWithTrackDetails();
+	updatePageWithTrackDetails(myuri);
 
 	player.observe(models.EVENT.CHANGE, function (e) {
 
@@ -31,7 +31,9 @@ function init() {
 
 }
 
-function updatePageWithTrackDetails() {
+function updatePageWithTrackDetails(myuri) {
+	
+	playlist = models.Playlist.fromURI(myuri);
 	
 	var header = document.getElementById("header");
 

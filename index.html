@@ -7,11 +7,12 @@
 	<link rel="stylesheet" href="sp://import/css/adam.css">
 	<link rel="stylesheet" href="cafeplaylist.css">
 </head>
-<body onload="sp = getSpotifyApi(); cafeplaylist = sp.require('cafeplaylist'); cafeplaylist.init();">
+<body onload=>
 <h1 id="header">Hello, world!</h1>
 
 	<form>
-		URI: <input type="text" name="playlisturi" /><br />
+		URI: <input name="playlisturi" id="playlisturi" type="text" /><br>
+		<input name="buttonExecute" onclick="sp = getSpotifyApi(); cafeplaylist = sp.require('cafeplaylist'); execute(cafeplaylist.init(document.getElementById('playlisturi').value));" type="button" value="Execute" />
 	</form> 
 </body>
 </html>
